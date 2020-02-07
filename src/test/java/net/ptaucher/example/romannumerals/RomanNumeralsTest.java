@@ -36,8 +36,45 @@ public class RomanNumeralsTest {
     assertEquals(5, number);
   }
 
-  // VII - 7
-  // XVI - 16
-  // IV - 4
+  // X - 10
+  @Test
+  public void testX() {
+    int number = roman.convert("X");
+    assertEquals(10, number);
+  }
+
   // XIV - 14
+  @Test
+  public void testXIV() {
+    int number = roman.convert("XIV");
+    assertEquals(14, number);
+  }
+
+  // XIV - 15
+  @Test
+  public void testXV() {
+    int number = roman.convert("XV");
+    assertEquals(15, number);
+  }
+
+  // XVI - 16
+  @Test
+  public void testXVI() {
+    int number = roman.convert("XVI");
+    assertEquals(16, number);
+  }
+
+  // LLXXVVII - 132
+  @Test
+  public void testLLXXVVII() {
+    int number = roman.convert("LLXXVVII");
+    assertEquals(132, number);
+  }
+
+  // XLIV - 44
+  @Test
+  public void testXLIV() {
+    int number = roman.convert("XLIV");
+    assertEquals(44, number);
+  }
 }

@@ -1,17 +1,33 @@
 package net.ptaucher.example.romannumerals;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RomanNumeral {
+  final Map<Character, Integer> table = new HashMap<>();
+
+  public RomanNumeral() {
+    table.put('I', 1);
+    table.put('V', 5);
+    table.put('X', 10);
+    table.put('L', 50);
+  }
 
   public int convert(String roman) {
-    if ("I".equals(roman)) {
-      return 1;
-    } else if ("II".equals(roman)) {
-      return 2;
-    } else if ("III".equals(roman)) {
-      return 3;
-    }else if ("V".equals(roman)) {
-      return 5;
+    int result = 0;
+    int current = Integer.MAX_VALUE;
+
+    for (char c: roman.toCharArray()) {
+      Integer value = table.get(c);
+      if (value != null) {
+        if (value > current) {
+          result -= (current*2);
+        }
+        result += value;
+        current = value;
+      }
     }
-    return 0;
+
+    return result;
   }
 }
