@@ -22,64 +22,81 @@ public class DiscountApplierTest {
 
   @Test
   public void testDiscountForMacBookAndIphone() {
-    Item item1 = new Item("MACBOOK", 1, 100);
-    Item item2 = new Item("IPHONE", 1, 50);
-
-    Basket basket = new Basket(Arrays.asList(item1, item2));
+    Basket basket = new BasketBuilder()
+        .add("MACBOOK", 1, 100)
+        .add("IPHONE", 1, 50)
+        .build();
 
     applier.apply(basket);
 
-    assertDiscount(basket, item1.getTotalPrice() + item2.getTotalPrice(), 0.15);
+    double baseAmount = basket.getAmount();
+
+    applier.apply(basket);
+
+    assertDiscount(basket, baseAmount,0.15);
   }
 
   @Test
   public void testDiscountForNotebookAndWindowsPhone() {
-    Item item1 = new Item("NOTEBOOK", 1, 100);
-    Item item2 = new Item("WINDOWS PHONE", 1, 50);
-
-    Basket basket = new Basket(Arrays.asList(item1, item2));
+    Basket basket = new BasketBuilder()
+        .add("NOTEBOOK", 1, 100)
+        .add("WINDOWS PHONE", 1, 50)
+        .build();
 
     applier.apply(basket);
 
-    assertDiscount(basket, item1.getTotalPrice() + item2.getTotalPrice(), 0.12);
+    double baseAmount = basket.getAmount();
+
+    applier.apply(basket);
+
+    assertDiscount(basket, baseAmount,0.12);
   }
 
   @Test
   public void testDiscountForXbox() {
-    Item item1 = new Item("XBOX", 1, 100);
-
-    Basket basket = new Basket(Arrays.asList(item1));
+    Basket basket = new BasketBuilder()
+        .add("XBOX", 1, 100)
+        .build();
 
     applier.apply(basket);
 
-    assertDiscount(basket, item1.getTotalPrice(), 0.7);
+    double baseAmount = basket.getAmount();
+
+    applier.apply(basket);
+
+    assertDiscount(basket, baseAmount,0.7);
   }
 
   @Test
   public void testDiscountForMoreThanTwoItemsLesserThanThousand() {
-    Item item1 = new Item("REFRIDGERATOR", 1, 100);
-
-    Basket basket = new Basket(Arrays.asList(item1));
+    Basket basket = new BasketBuilder()
+        .add("REFRIDGERATOR", 1, 100)
+        .build();
 
     applier.apply(basket);
 
-    assertDiscount(basket, item1.getTotalPrice(), 0.02);
+    double baseAmount = basket.getAmount();
+
+    applier.apply(basket);
+
+    assertDiscount(basket, baseAmount,0.02);
   }
 
   @Test
   public void testDiscountForMoreThan5Products() {
-    Item item1 = new Item("REFRIDGERATOR", 1, 100);
-    Item item2 = new Item("DISH WASHER", 1, 500);
-    Item item3 = new Item("DRYER", 1, 1500);
-    Item item4 = new Item("TOILET 1", 1, 2500);
-    Item item5 = new Item("TOILET 2", 1, 1500);
-    Item item6 = new Item("TOILET 3", 1, 500);
+    Basket basket = new BasketBuilder()
+        .add("REFRIDGERATOR", 1, 100)
+        .add("DISH WASHER", 1, 100)
+        .add("DRYER", 1, 1000)
+        .add("TOILET 1", 1, 1500)
+        .add("TOILET 2", 1, 1200)
+        .add("TOILET 3", 1, 500)
+        .build();
 
-    Basket basket = new Basket(Arrays.asList(item1, item2, item3, item4, item5, item6));
+    double baseAmount = basket.getAmount();
 
     applier.apply(basket);
 
-    assertDiscount(basket, item1.getTotalPrice() + item2.getTotalPrice() + item3.getTotalPrice() + item4.getTotalPrice() + item5.getTotalPrice() + item6.getTotalPrice(),
-        0.06);
+    assertDiscount(basket, baseAmount,0.06);
   }
 }
