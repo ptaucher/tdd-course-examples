@@ -77,4 +77,18 @@ public class RomanNumeralsTest {
     int number = roman.convert("XLIV");
     assertEquals(44, number);
   }
+
+  // MMXVIII - 2018
+  @Test
+  public void testMMXVIII() {
+    int number = roman.convert("MMXVIII");
+    assertEquals(2018, number);
+  }
+
+  // MCMLXV - 1965
+  @Test
+  public void testMCMLXV() {
+    int number = roman.convert("MCMLXV");
+    assertEquals(1965, number);
+  }
 }

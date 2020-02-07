@@ -11,6 +11,9 @@ public class RomanNumeral {
     table.put('V', 5);
     table.put('X', 10);
     table.put('L', 50);
+    table.put('C', 100);
+    table.put('D', 500);
+    table.put('M', 1000);
   }
 
   public int convert(String roman) {
