@@ -33,4 +33,17 @@ public class InvoiceFilterTest {
     assertEquals(1, result.size());
     assertEquals(inv1, result.get(0));
   }
+
+  @Test
+  public void filterInvoicesMicrosoft() {
+    Invoice inv1 = new Invoice(Calendar.getInstance(), "Pedro", 1000);
+    Invoice inv2 = new Invoice(Calendar.getInstance(), "MICROSOFT", 800);
+
+    Mockito.when(respository.all()).thenReturn(Arrays.asList(inv1, inv2));
+
+    List<Invoice> result = filter.filter();
+
+    assertEquals(1, result.size());
+    assertEquals(inv2, result.get(0));
+  }
 }
